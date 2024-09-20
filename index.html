@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Common Words</title>
+</head>
+<body>
+    <h1>Find the Most Common Words</h1>
+    <textarea id="inputText" rows="10" cols="50">
+        In this assignment, you'll need to start with a given string that contains a number of words. Then, define the number of times each word appears in the given text. After that point, you will see what the top three words used are.
+        The starter code already has some of this functionality implemented. Please go through the code in the wordcount.js file and read the comments to understand how this logic will work.
+        .
+    </textarea>
+    <br>
+    <button onclick="findMostCommonWords()">Find Top 3 Words</button>
+    <script>
+        function findMostCommonWords() {
+             let text = document.getElementById('inputText').value;
+             text = text.toLowerCase();
+            let wordsArray = text.replace(/[^\w\s]/g, "").split(/\s+/);
+            let wordCount = {};
+            wordsArray.forEach(word => {
+                wordCount[word] = (wordCount[word] || 0) + 1;
+            });
+             let sortedWords = Object.entries(wordCount).sort((a, b) => b[1] - a[1]);
+             let topThreeWords = sortedWords.slice(0, 3);
+            console.log("Top 3 Most Common Words:");
+            topThreeWords.forEach(([word, count], index) => {
+                console.log(`${index + 1}. ${word}: ${count} times`);
+            });
+        }
+    </script>
+</body>
+</html>
